@@ -1,0 +1,88 @@
+/* --- World Health Organization ----------------------------------------------------- */
+/* --- CSS Framework: Language Extension English -------------------------------------- */
+/* --- Version ------------------------------------------------------------------- */
+
+
+/*<![CDATA[*/
+@media all {
+    
+    
+/* -------------------------------------------------------------------------------------
+ layout.css
+ ======================================================================================*/
+
+/* -------------------------------------------------------------------------------------
+ branding
+ ---------------------------------------------------------------------------------------*/
+ 
+ #branding a {
+   background-image: url('../../../resources/who-logo-pt.gif');
+   width: 200px;
+ }
+}
+
+
+/*<![CDATA[*/
+@media screen {
+  /* footer */
+  #footer {
+	  background-image:url(../../img/footer_emblem-en-r.gif);
+  }
+  #branding a {
+    background-image: url(../../../resources/who-logo-en.jpg);
+  }
+}
+
+@media only screen and (max-width:720px) {
+  #branding a {
+    background-image: url(../../../resources/who-logo-en-white.png);
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+
+#doormat .footer-social-links {
+	width: 310px;
+}
+
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi),
+only screen and (min-resolution: 2dppx) {
+  #branding a {
+    background-image: url(../../../resources/2x-who-logo-en.gif);
+    background-size: 176px 55px;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 720px),
+only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 720px),
+only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 720px),
+only screen and (min-device-pixel-ratio: 2) and (max-width: 720px),
+only screen and (min-resolution: 192dpi) and (max-width: 720px),
+only screen and (min-resolution: 2dppx) and (max-width: 720px) {
+  #branding a {
+    background-image: url(../../../resources/2x-who-logo-en-white.gif);
+    background-size: 140px 43px; 
+  }
+}
+
+
+@media print {
+
+#branding a {
+   content:url(../../../resources/who-logo-en.jpg);	
+   display:block;
+	width:176px;
+	margin: 10px auto;
+	z-index: 10;
+	background-repeat: no-repeat;
+  }
+}
+
+/*]]>*/

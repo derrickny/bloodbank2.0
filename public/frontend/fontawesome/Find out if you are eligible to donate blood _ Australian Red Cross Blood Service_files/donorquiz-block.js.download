@@ -1,0 +1,112 @@
+(function ( $ ) {
+
+    // Initiate DonorQuiz
+    function init()
+    {
+        donorQuiz();
+        eventHandlers();
+    };
+
+    // Start up quiz, remove non-js styling
+    function donorQuiz()
+    {
+        var quiz = $('#quiz');
+        var listItem = $('#quiz').find('li[id]');
+
+        // Remove loading active class
+        $('#quiz li.active').removeClass('active');
+        listItem.first().addClass('active');
+    };
+
+    // Skip any fail slides and show next slide.
+    function nextSlide(selector)
+    {
+        var listItem = selector.closest('li');
+        var listItemNext = listItem.nextAll('li:not(".failSlide")').eq(0);
+        
+        listItem.removeClass('active');
+        listItemNext.addClass('active');
+    };
+
+    // Show previous slide
+    function prevSlide(selector)
+    {
+        var listItem = selector.closest('li');
+        var listItemNext;
+
+        // If currently on a fail slide, show question relevent to it.
+        if(listItem.hasClass('failSlide'))
+        {
+            listItemNext = listItem.prevAll('li').eq(0);
+        }
+
+        // Else skip any fail slides and show previous question.
+        else
+        {
+            listItemNext = listItem.prevAll('li:not(".failSlide")').eq(0);
+        }
+        
+        listItem.removeClass('active');
+        listItemNext.addClass('active');        
+    };
+
+    // Show fail slide for this question if available
+    function failSlide(selector)
+    {
+        var listItem = selector.closest('li');
+        var listItemNext = listItem.nextAll('li.failSlide').eq(0);
+        
+        listItem.removeClass('active');
+        listItemNext.addClass('active');
+    };
+
+    // Return to first slide from current slide
+    function firstSlide(selector)
+    {
+        var listItem = selector.closest('li');
+        var firstSlide = $('#qz-0');
+        
+        listItem.removeClass('active');
+        firstSlide.addClass('active');
+    };
+
+    // Button event handlers
+    function eventHandlers()
+    {
+        // Start and No buttons
+        $('#quiz .start, #quiz .no').on('click keypress', function(e){
+            nextSlide($(this));
+
+            e.preventDefault();
+        });
+
+        // Yes button
+        $('#quiz .yes').on('click keypress', function(e){
+            failSlide($(this));
+
+            e.preventDefault();
+        });
+
+        // Back button
+        $('#quiz .back').on('click keypress', function(e){
+            prevSlide($(this));
+
+            e.preventDefault();
+        });
+
+        // Start over button
+        $('#quiz .start-over').on('click keypress', function(e){
+            firstSlide($(this));
+
+            e.preventDefault();
+        });
+    };
+
+    // Initiate Script
+    $('document').ready(function(){
+        if($('#quiz')[0])
+        {
+            init();
+        }
+    });
+}( jQuery ));

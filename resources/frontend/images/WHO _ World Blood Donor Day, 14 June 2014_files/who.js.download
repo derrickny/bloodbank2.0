@@ -1,0 +1,363 @@
+/**
+* WHO JavaScript stuff.
+* @author NOSE
+* V1.03 GA media tracking update
+
+*/
+
+function fixMenu() {
+// place holder for fixMenu function
+};
+
+/****************
+For the campaigns
+*****************/
+// Enable = 1, disable = 0
+var campaignEnabled = 0;
+
+var campaignID = ""; //Example: "blood-day-2016"
+
+//All campaign images (each language can have unlimited images, comma separated)
+//   ex: campImages['en'] = ["http://www.who.int/campaigns/world-blood-donor-day/2016/masthead-girl-es.jpg", "http://www.who.int/campaigns/world-blood-donor-day/2016/masthead-girl-es.jpg"];
+var campImages = new Object(); 
+campImages['en'] = [];
+campImages['es'] = [];
+campImages['ar'] = [];
+campImages['ru'] = [];
+campImages['zh'] = [];
+campImages['fr'] = [];
+
+//Url of the page opening when clicking on the image
+//without the language code and finishing with /
+// ex: var campUrl = "http://www.who.int/campaigns/hepatitis-day/2016/"
+var campUrl = "";
+
+function getRandomNumber(min, max){
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function setCampaign (campLang){
+	//Using this we control to display the information only if there is, at least, one image
+	if ( campImages[campLang].length > 0){
+		//Setting the header	
+		var oneImage = campImages[campLang][getRandomNumber(0, campImages[campLang].length-1)];
+		$("#campaignHighlight").append("<a href='" + campUrl + campLang + "/" + "' id ='" + campaignID + "'> <span>" + campaignID + "</span><img src='" + oneImage + "' alt='" + campaignID + "'></a>" );
+	
+		//Setting the responsive
+		campaignHighlight(oneImage, campaignID, campLang, campUrl);
+	}
+}
+
+/****************
+END: For the campaigns
+*****************/
+
+var WHO = {
+	
+	/**
+	* Initialize.
+	*/
+	initOnReady: function() {
+		
+		// develop tools
+		//jQuery(document).devTools();
+					
+		// context
+		var ctxPage = jQuery("#page");
+		var ctxHeader = jQuery("#header");
+		var ctxMain = jQuery("#main");
+		var ctxSidebar = jQuery("#sidebar");
+		var ctxContent = jQuery("#content");
+		
+		// init all
+		WHO.prepareFlags();
+		WHO.initPanel(ctxPage);
+		//WHO.initSearch(ctxHeader);
+		WHO.initToggler(ctxMain);
+		WHO.initModal(ctxMain);
+		WHO.initScroller(ctxMain);
+		WHO.initHoverable(ctxMain);
+		WHO.initDropdowns(ctxMain);
+		WHO.initFacets(ctxSidebar);
+		WHO.initIndexes(ctxContent);
+		WHO.initTabs(ctxContent);
+		WHO.initStories(ctxContent);
+		WHO.initPrintLinks(ctxPage);
+
+	},
+	
+	/**
+	* Prepares the flags.
+	*/
+	browserIE:false,
+	browserIE6:false,
+	prepareFlags: function() {
+		// browser flags
+		if (jQuery.browser.msie) {
+			WHO.browserIE = true;
+		}
+		if (jQuery.browser.msie && jQuery.browser.version.substr(0,1)<7) {
+			WHO.browserIE6 = true;
+		}
+	},
+	
+	
+	
+	/**
+	* Initialize the panel.
+	*/
+	initPanel: function(ctx) {	
+		
+		// ticker
+		jQuery("#ticker").panel();
+	},
+	
+	
+	/**
+	* Initialize the togglers.
+	*/
+	initToggler: function(ctx) {	
+		
+		// togglers
+		jQuery(".toggler",ctx).each(function(ind,el) {
+			// vars
+			var id = jQuery(el).attr("id");
+			var msgExpanded = null;
+			var msgCollapsed = null;
+			var expanded = false;
+			var title = jQuery(this).attr("title");
+			if (jQuery(el).hasClass("expanded")) {
+				expanded = true;	
+			}
+			if (title.indexOf("$") >= 0) {
+				var msgs = title.split("$");
+				msgCollapsed = msgs[0];
+				msgExpanded = msgs[1];
+			}
+			
+			// toggle
+			jQuery(el).toggler("."+id,{expanded:expanded,msgCollapsed:msgCollapsed,msgExpanded:msgExpanded,animate:false});
+											 
+		});
+	},
+	
+	/**
+	 * Initialize the modal.
+	 */
+	initModal: function(ctx){
+		jQuery(".modal",ctx).nyroModal({
+			bgColor:'#F5F5F5',
+			minHeight:'100',
+			hideContent:function hideModal(elts, settings, callback) {
+			  elts.wrapper.hide().animate({opacity: 0}, {complete: callback, duration: 80}); 
+			},
+			showBackground:function showBackground(elts, settings, callback) {
+				elts.bg.css({opacity:0}).fadeTo(300, 0.75, callback);
+			}
+		});
+	},
+	
+	/**
+	* Initialize tabs.
+	*/
+	initTabs: function(ctx) {
+		// tabs
+		jQuery("#tabs",ctx).tabs({fx:{opacity:'toggle'}});
+	},
+	
+	
+	/**
+	* Initialize search.
+	*/
+	initSearch: function(ctx) {
+		// field enhancer
+		jQuery("#search_input input",ctx).fieldEnhancer("search_form","#search_form",{"fieldValue":"Search WHO.int"});
+	},
+	
+	/**
+	* Initialize stories.
+	*/
+	initStories: function(ctx) {
+		// story
+		jQuery(".stories",ctx).each(function(ind,el) {
+			jQuery(el).story();
+		});
+	},
+	
+	/**
+	 * Initialize the scroller.
+	 */
+	initScroller: function(ctx) {
+		jQuery(".scroller",ctx).scroller();
+		jQuery("sup a",ctx).scroller({"anchor":true});
+	},
+		
+	/**
+	* Initialize the hoverables.
+	*/
+	initHoverable: function(ctx) {	
+		
+		// hoverables
+		jQuery(".hoverable, a.image, a.link_image, a.modal, ul.feature li, ul.index li, ul.events li, ul.listing > li:not(.listing_dropdown)",ctx).each(function(i,els){
+			
+			// events
+			jQuery(els).bind("mouseenter",function(){
+				jQuery(this).addClass("hover");
+				jQuery("img",this).animate({opacity: 0.9}, 180);
+			});
+			jQuery(els).bind("mouseleave",function(){
+				jQuery(this).removeClass("hover");
+				jQuery("img",this).animate({opacity: 1.0}, 300);
+			});
+			jQuery(els).bind("click",function(){
+				// modal
+				if (jQuery(this).hasClass("modal")) {
+					return true;
+				}
+				
+				// follow link
+				var h = jQuery("a",this).attr("href");
+				if (h == null) {
+					h = jQuery(this).attr("href");
+				};
+				if (h != null) {
+					window.location.href = h;
+					return false;
+				};
+			});
+		});
+		
+
+	},
+	
+	/**
+	* Initializes the dropdowns.
+	*/
+	initDropdowns: function(ctx) {
+		var z = 100;
+		jQuery("div.dropdown").each(function(){
+			jQuery(this).dropdown();
+			jQuery(this).css("z-index",z);
+			z--;
+		});
+		jQuery("li.listing_dropdown").each(function(){
+			jQuery(this).css({"z-index":z,"height":45});
+			z--;
+		});
+	},
+	
+	/**
+	* Initializes the facets.
+	*/
+	initFacets: function(ctx) {
+		// form
+		var facetForm = jQuery("#facets form");
+		if (facetForm != null) {
+			// we have form
+			var inputs = jQuery("input",facetForm);
+			// a change resubmits the form
+			jQuery(inputs).bind("change",function(){
+				jQuery(facetForm).submit();
+			});
+		}
+	},
+	
+	/**
+	* Initializes the indexes.
+	*/
+	initIndexes: function(ctx) {
+		// indexed
+		if (! WHO.browserIE6) {
+			jQuery(".indexes").each(function(){
+				jQuery(this).indexer();
+			});
+		}
+	},
+	
+	/**
+	* Initialize the print links.
+	*/
+	initPrintLinks: function(ctx) {	
+		jQuery("#pageaction_print, .print",ctx).bind("click",function(){
+			window.print();
+		});
+	}
+}
+jQuery(document).ready(function(){
+	WHO.initOnReady();
+});
+
+if (typeof jQuery != 'undefined') {
+    jQuery(document).ready(function($) {
+        var filetypes = /\.(zip|exe|pdf|jpg|jpeg|gif|png|doc*|xls*|ppt*|epub|mp3)$/i;
+        var baseHref = '';
+        if (jQuery('base').attr('href') != undefined)
+            baseHref = jQuery('base').attr('href');
+        jQuery('a').each(function() {
+            var href = jQuery(this).attr('href');
+            if (href && href.match(/^mailto\:/i)) {
+                jQuery(this).click(function() {
+                    var mailLink = href.replace(/^mailto\:/i, '');
+                    _gaq.push(['_trackEvent', 'Email', 'Click', mailLink]);
+                });
+            }
+            else if (href && href.match(filetypes)) {
+                jQuery(this).click(function() {
+                    var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
+                    var filePath = href;
+                    _gaq.push(['_trackEvent', 'Download', 'Click-' + extension, filePath]);
+                    //if (jQuery(this).attr('target') != undefined && jQuery(this).attr('target').toLowerCase() != '_blank') {
+                    //    setTimeout(function() { location.href = baseHref + href; }, 200);
+                    //    return false;
+                    // }
+                });
+            }
+        });
+    });
+}
+
+//Jquery autocomplete https://goodies.pixabay.com/jquery/auto-complete/demo.html
+!function(e){e.fn.autoComplete=function(t){var o=e.extend({},e.fn.autoComplete.defaults,t);return"string"==typeof t?(this.each(function(){var o=e(this);"destroy"==t&&(e(window).off("resize.autocomplete",o.updateSC),o.off("blur.autocomplete focus.autocomplete keydown.autocomplete keyup.autocomplete"),o.data("autocomplete")?o.attr("autocomplete",o.data("autocomplete")):o.removeAttr("autocomplete"),e(o.data("sc")).remove(),o.removeData("sc").removeData("autocomplete"))}),this):this.each(function(){function t(e){var t=s.val();if(s.cache[t]=e,e.length&&t.length>=o.minChars){for(var a="",c=0;c<e.length;c++)a+=o.renderItem(e[c],t);s.sc.html(a),s.updateSC(0)}else s.sc.hide()}var s=e(this);s.sc=e('<div class="autocomplete-suggestions '+o.menuClass+'"></div>'),s.data("sc",s.sc).data("autocomplete",s.attr("autocomplete")),s.attr("autocomplete","off"),s.cache={},s.last_val="",s.updateSC=function(t,o){if(s.sc.css({top:s.offset().top+s.outerHeight(),left:s.offset().left,width:s.outerWidth()}),!t&&(s.sc.show(),s.sc.maxHeight||(s.sc.maxHeight=parseInt(s.sc.css("max-height"))),s.sc.suggestionHeight||(s.sc.suggestionHeight=e(".autocomplete-suggestion",s.sc).first().outerHeight()),s.sc.suggestionHeight))if(o){var a=s.sc.scrollTop(),c=o.offset().top-s.sc.offset().top;c+s.sc.suggestionHeight-s.sc.maxHeight>0?s.sc.scrollTop(c+s.sc.suggestionHeight+a-s.sc.maxHeight):0>c&&s.sc.scrollTop(c+a)}else s.sc.scrollTop(0)},e(window).on("resize.autocomplete",s.updateSC),s.sc.appendTo("body"),s.sc.on("mouseleave",".autocomplete-suggestion",function(){e(".autocomplete-suggestion.selected").removeClass("selected")}),s.sc.on("mouseenter",".autocomplete-suggestion",function(){e(".autocomplete-suggestion.selected").removeClass("selected"),e(this).addClass("selected")}),s.sc.on("mousedown",".autocomplete-suggestion",function(t){var a=e(this),c=a.data("val");return(c||a.hasClass("autocomplete-suggestion"))&&(s.val(c),o.onSelect(t,c,a),s.sc.hide()),!1}),s.on("blur.autocomplete",function(){try{over_sb=e(".autocomplete-suggestions:hover").length}catch(t){over_sb=0}over_sb?s.is(":focus")||setTimeout(function(){s.focus()},20):(s.last_val=s.val(),s.sc.hide(),setTimeout(function(){s.sc.hide()},350))}),o.minChars||s.on("focus.autocomplete",function(){s.last_val="\n",s.trigger("keyup.autocomplete")}),s.on("keydown.autocomplete",function(t){if((40==t.which||38==t.which)&&s.sc.html()){var a,c=e(".autocomplete-suggestion.selected",s.sc);return c.length?(a=40==t.which?c.next(".autocomplete-suggestion"):c.prev(".autocomplete-suggestion"),a.length?(c.removeClass("selected"),s.val(a.addClass("selected").data("val"))):(c.removeClass("selected"),s.val(s.last_val),a=0)):(a=40==t.which?e(".autocomplete-suggestion",s.sc).first():e(".autocomplete-suggestion",s.sc).last(),s.val(a.addClass("selected").data("val"))),s.updateSC(0,a),!1}if(27==t.which)s.val(s.last_val).sc.hide();else if(13==t.which||9==t.which){var c=e(".autocomplete-suggestion.selected",s.sc);c.length&&s.sc.is(":visible")&&(o.onSelect(t,c.data("val"),c),setTimeout(function(){s.sc.hide()},20))}}),s.on("keyup.autocomplete",function(a){if(!~e.inArray(a.which,[13,27,35,36,37,38,39,40])){var c=s.val();if(c.length>=o.minChars){if(c!=s.last_val){if(s.last_val=c,clearTimeout(s.timer),o.cache){if(c in s.cache)return void t(s.cache[c]);for(var l=1;l<c.length-o.minChars;l++){var i=c.slice(0,c.length-l);if(i in s.cache&&!s.cache[i].length)return void t([])}}s.timer=setTimeout(function(){o.source(c,t)},o.delay)}}else s.last_val=c,s.sc.hide()}})})},e.fn.autoComplete.defaults={source:0,minChars:3,delay:150,cache:1,menuClass:"",renderItem:function(e,t){t=t.replace(/[-\/\\^$*+?.()|[\]{}]/g,"\\$&");var o=new RegExp("("+t.split(" ").join("|")+")","gi");return'<div class="autocomplete-suggestion" data-val="'+e+'">'+e.replace(o,"<b>$1</b>")+"</div>"},onSelect:function(e,t,o){}}}(jQuery);
+$( document ).ready(function() {
+			$('input[name="q"]').autoComplete({
+				source: function( term, suggest ) {
+					term = term.toLowerCase();
+					
+					var getUrlParameter = function getUrlParameter(sParam) {
+						var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+							sURLVariables = sPageURL.split('&'),
+							sParameterName,
+							i;
+
+						for (i = 0; i < sURLVariables.length; i++) {
+							sParameterName = sURLVariables[i].split('=');
+
+							if (sParameterName[0] === sParam) {
+								return sParameterName[1] === undefined ? true : sParameterName[1];
+							}
+						}
+					};
+
+					var uclient = getUrlParameter("client")
+					if (uclient == null){
+						//we are not in the search page but in the site, 
+						//so there is not a "client" parameter
+						var parts =  window.location.pathname.split("/");
+						uclient = "_" + parts[parts.length-2] + "_r";
+					}
+					console.log("uclient is : " + uclient);
+					$.ajax({
+					  url: "http://search.who.int/suggest?q=" + term + "&max=7&site=default_collection&client=" + uclient + "&access=p&format=os",
+					  dataType: "jsonp",
+					  success: function( data ) {  
+						//response(data);
+						//var suggestions = [];
+						//for (i=0;i<data[1].length;i++)
+						//	suggestions.push(data[1][i]);
+						suggest(data[1]);
+					  }
+					});
+				},
+			});
+});
+
