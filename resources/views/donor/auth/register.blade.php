@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Attendance -  Student Registration</title>
+        <title>HAPPY BLOOD - BANK</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="" name="description" />
         <meta content="" name="author" />
@@ -20,7 +20,7 @@
     <body class="authentication-bg bg-gradient">
     
 
-        <a href="index.html" style="text-align:center;color:antiquewhite;
+        <a href="{{url('logindonor')}}" style="text-align:center;color:antiquewhite;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;text-decoration: none;
         margin-left:80%;padding-top:100px;"> Sign In Here </a>
 
@@ -33,7 +33,7 @@
                                 <div class="card-body p-2">
                                     
                                     <div class="text-center w-75 m-auto">
-                                        <a href="index.html">
+                                        <a href="{{url('logindonor')}}">
                                             <span style="font-size: 18px;color:black;">HAPPY BLOOD DONOR</span>
                                         </a>
                                         <h5 class="text-uppercase text-center font-bold mt-4">Donor Registration Page</h5>
@@ -136,7 +136,7 @@
     
                                     <div class="row mt-4">
                                         <div class="col-sm-12 text-center">
-                                            <p class="text-muted mb-0">Already have an account?  <a href="index.html" class="text-dark ml-1"><b>Sign In</b></a></p>
+                                            <p class="text-muted mb-0">Already have an account?  <a href="{{url('logindonor')}}" class="text-dark ml-1"><b>Sign In</b></a></p>
                                         </div>
                                     </div>
     

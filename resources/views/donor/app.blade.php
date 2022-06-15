@@ -63,7 +63,7 @@
         <li><a href="#" class="scroll-link" data-id="about">About Donation</a> </li>
 		<li><a href="#" class="scroll-link" data-id="camps">Hospitals</a></li>
 		<li><a href="#" class="scroll-link" data-id="contact">Contact us</a></li>
-        <li><a href="#" class="scroll-link" data-id="contact">Login</a></li>
+        <li><a href="{{url('logindonor')}}" class="scroll-link" data-id="contact">Login</a></li>
 		<li class="icon"><a href="javascript:void(0);" style="font-size: 15px;" onclick="myFunction()">&#9776;</a></li>
     </ul>
 	    <!--/.navbar-->
@@ -84,16 +84,13 @@
 				<div class="row" style="font-family: helvetica;">
 					<div class="col-md-4">
 						<div class="register w3-hover-amber">
-							<a style="text-decoration:none;color:#fff;" href="{{url('register')}}">Become A Blood Donor</a>
+							<a style="text-decoration:none;color:#fff;" href="{{url('registerdonor')}}">Become A Blood Donor</a>
 							<br>
 						<br>
 						
 							
-							<button onclick="document.getElementById('id02').style.display='block'" class="bt success">REGISTER</button>
-							<div id="id02" class="mod1">
-								
-			
-		                  </div>
+							<a href="{{ url('registerdonor') }}" class="bt success">REGISTER</a>
+							
 						</div>
 							</div>
 						
@@ -104,10 +101,8 @@
 							<strong>HOSPITAL</strong>
 							<br>
 						<br>
-						<button onclick="document.getElementById('id01').style.display='block'" style="width: auto;" class="bt info">LOGIN</button>
-						<div id="id01" class="mod">
-							
-							</div>
+						<button  style="width: auto;" class="bt info">REGISTER</button>
+		
 						</div>
 						
 						</div>

@@ -5,7 +5,7 @@
 					<img src="{{asset('backend/assets/images/logo-icon.png')}}" class="logo-icon" alt="logo icon">
 				</div>
 				<div>
-					<h4 class="logo-text">Trade Mogul Limited</h4>
+					<h4 class="logo-text">HAPPY BLOOD BANK</h4>
 				</div>
 				<div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
 				</div>
@@ -19,16 +19,18 @@
 						<div class="menu-title">Dashboard</div>
 					</a>
 					<ul>
-						<li> <a href="{{url('new-vehicle')}}"><i class="bx bx-right-arrow-alt"></i>New Vehicle</a>
+						<li> <a href="#"><i class="bx bx-right-arrow-alt"></i>New Hospital</a>
 						</li>
-						<li> <a href="{{url('vehicles-list')}}"><i class="bx bx-right-arrow-alt"></i>Vehicles List</a>
+						<li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Hospitals List</a>
 						</li>
-						<li> <a href="{{url('orders-list')}}"><i class="bx bx-right-arrow-alt"></i>Orders List</a>
+						<li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Donors List</a>
 						</li>
-						<li> <a href="{{ route('logout') }}"
+                        <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Blood Groups</a>
+						</li>
+						<li> <a href="{{ url('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="bx bx-right-arrow-alt"></i>Logout
-						<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+						<form id="logout-form" action="{{ url('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
 					</a>
