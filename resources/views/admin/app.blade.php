@@ -9,18 +9,18 @@
 	<!--favicon-->
 	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
 	<!--plugins-->
-	<link href="{{asset('backend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
-	<link href="{{asset('backend/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
-	<link href="{{asset('backend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
-	<link href="{{asset('backend/assets/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('backend/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
+	<link href="{{asset('backend/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
+	<link href="{{asset('backend/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
+	<link href="{{asset('backend/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
 	<!-- loader-->
-	<link href="{{asset('backend/assets/css/pace.min.css')}}" rel="stylesheet" />
-	<script src="{{asset('backend/assets/js/pace.min.js')}}"></script>
+	<link href="{{asset('backend/css/pace.min.css')}}" rel="stylesheet" />
+	<script src="{{asset('backend/js/pace.min.js')}}"></script>
 	<!-- Bootstrap CSS -->
-	<link href="{{asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{asset('backend/css/bootstrap.min.css')}}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
-	<link href="{{asset('backend/assets/css/app.cs')}}s" rel="stylesheet">
-	<link href="{{asset('backend/assets/css/icons.css')}}" rel="stylesheet">
+	<link href="{{asset('backend/css/app.cs')}}s" rel="stylesheet">
+	<link href="{{asset('backend/css/icons.css')}}" rel="stylesheet">
 	<script src="{{ asset('js/app.js') }}" defer></script>
 
     <style>
@@ -65,14 +65,14 @@
 	<!--end wrapper-->
 
 	<!-- Bootstrap JS -->
-	<script src="{{asset('backend/assets/js/bootstrap.bundle.min.js')}}"></script>
+	<script src="{{asset('backend/js/bootstrap.bundle.min.js')}}"></script>
 	<!--plugins-->
-	<script src="{{asset('backend/assets/js/jquery.min.js')}}"></script>
-	<script src="{{asset('backend/assets/plugins/simplebar/js/simplebar.min.js')}}"></script>
-	<script src="{{asset('backend/assets/plugins/metismenu/js/metisMenu.min.js')}}"></script>
-	<!-- <script src="{{asset('backend/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script> -->
-	<script src="{{asset('backend/assets/plugins/jquery-knob/excanvas.js')}}"></script>
-	<script src="{{asset('backend/assets/plugins/jquery-knob/jquery.knob.js')}}"></script>
+	<script src="{{asset('backend/js/jquery.min.js')}}"></script>
+	<script src="{{asset('backend/plugins/simplebar/js/simplebar.min.js')}}"></script>
+	<script src="{{asset('backend/plugins/metismenu/js/metisMenu.min.js')}}"></script>
+	<!-- <script src="{{asset('backend/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script> -->
+	<script src="{{asset('backend/plugins/jquery-knob/excanvas.js')}}"></script>
+	<script src="{{asset('backend/plugins/jquery-knob/jquery.knob.js')}}"></script>
 	  <script>
 		  $(function() {
 			  $(".knob").knob();
@@ -80,7 +80,7 @@
 	  </script>
 	 
 	<!--app JS-->
-	<script src="{{asset('backend/assets/js/app.js')}}"></script>
+	<script src="{{asset('backend/js/app.js')}}"></script>
 	 <!-- Scripts -->
 </body>
 

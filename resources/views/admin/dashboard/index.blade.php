@@ -17,8 +17,8 @@
 								<hr>
 								<form class="row g-3" method="POST">
 									<div class="col-md-12">
-										<label for="vehicle_no_plate" class="form-label">Name</label>
-										<div class="input-group"> <span class="input-group-text"><i class='bx bxs-car'></i></span>
+										<label for="name" class="form-label">Name</label>
+										<div class="input-group"> <span class="input-group-text"><i class='bx bxs-user'></i></span>
 											<input type="text" name="hospital_name" class="form-control border-start-0" id="hospital_name"  />
 										</div>
 									</div>
@@ -30,14 +30,14 @@
 									</div>
 									<div class="col-12 clearfix">
 										<label for="vehicle_capacity" class="form-label">Phone Number</label>
-										<div class="input-group"> <span class="input-group-text"><i class='bx bxs-volume' ></i></span>
+										<div class="input-group"> <span class="input-group-text"><i class='bx bx-phone' ></i></span>
 											<input type="number" name="phone_number" class="form-control border-start-0" id="phone_number"  />
 										</div>
 									</div>
 
                                     <div class="col-12 clearfix">
 										<label for="email" class="form-label">Email</label>
-										<div class="input-group"> <span class="input-group-text"><i class='bx bxs-volume' ></i></span>
+										<div class="input-group"> <span class="input-group-text"><i class='bx bx-message' ></i></span>
 											<input type="number" name="email" class="form-control border-start-0" id="email"  />
 										</div>
 									</div>

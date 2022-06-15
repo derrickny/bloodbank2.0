@@ -53,7 +53,8 @@
                                      
                     
                                     
-                                    <form method="POST" id="loginForm">
+                                    <form method="POST">
+                                    @csrf 
                                        <div id="login-message-error" style="display: none;" class="alert alert-dismissable alert-danger">
 
                                        </div>
