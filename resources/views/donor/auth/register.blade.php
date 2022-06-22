@@ -3,13 +3,13 @@
     <head>
         <meta charset="utf-8" />
         <title>HAPPY BLOOD - BANK</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="" name="description" />
         <meta content="" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{asset('frontend/assets/images/favicon.ico')}}">
-
         <!-- App css -->
         <link href="{{asset('frontend/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('frontend/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
@@ -58,7 +58,7 @@
                                      </div>
                                      <div class="form-group col-md-4 col-lg-4 col-sm-4">
                                         <label for="emailaddress">ID Number</label>
-                                        <input class="form-control" type="number" id="reg_no" name="reg_no" required placeholder="Enter Reg No">
+                                        <input class="form-control" type="number" id="id_no" name="id_no" placeholder="Enter Reg No">
                                     </div>
                                       </div>
                                         <div class="row">
@@ -76,6 +76,8 @@
                                                      <input type="radio" name="gender" value="MALE" checked>  MALE
                                                      </label>
                                                     </div>
+                                                    <div class="col-md-3 col-lg-3 col-sm-3">
+                                                     </div>
                                                     <div class="col-md-3 col-lg-3 col-sm-3">
                                                     <label class="radio-inline" style="color:#000;">
                                                      <input type="radio" value="FEMALE" name="gender">  FEMALE
@@ -99,15 +101,35 @@
                                                 
                                                 <div class="form-group" style="padding-left:1%">
                                                 <label for="course">Residence</label>
-                                               <input type="text" name="residence" class="form-control" required placeholder="Enter Residence">
+                                               <input type="text" name="location" class="form-control" required placeholder="Enter Residence">
                                                </div>
                                               
                                             </div>
                                         </div>
                                         <div class="row p-2 ">
-                                            <div class="form-group col-sm-12 col-md-12 col-lg-12" style="padding-left:1%">
+                                            <div class="form-group col-sm-6 col-md-6 col-lg-6" style="padding-left:1%">
                                                 <label for="course">Phone Number</label>
                                                <input type="number" name="phone_no" class="form-control" required placeholder="Enter Phone No">
+                                            </div>
+                                            <div class="form-group col-sm-6 col-md-6 col-lg-6" style="padding-left:1%">
+                                                <label for="course">Date of Birth</label>
+                                               <input type="date" name="date_of_birth" class="form-control" required placeholder="Date Of Birth">
+                                            </div>
+
+                                        </div>
+                                        <div class="row p-2 ">
+                                            <div class="form-group col-sm-12 col-md-12 col-lg-12" style="padding-left:1%">
+                                                <label for="course">Blood Group</label>
+                                                <select name="bld_grp" class="form-control" id="bld_grp">
+                                                    <option value="A+">A+</option>
+                                                    <option value="A-">A-</option>
+                                                    <option value="B+">B+</option>
+                                                    <option value="B-">B-</option>
+                                                    <option value="AB+">AB+</option>
+                                                    <option value="AB-">AB-</option>
+                                                    <option value="O+">O+</option>
+                                                    <option value="O-">O-</option>
+                                                </select>
                                             </div>
                                            
 
@@ -164,42 +186,62 @@
         <script src="{{asset('frontend/assets/js/app.min.js')}}"></script>
         <script>
             $(document).ready(function(){
-                $("#registerUser").on('submit',(function(e)
-					{
-					//alert("You Are Good To Go");
-					e.preventDefault();
-					$.ajax({
-						url:"add_student.php",
-						type:"POST",
-						data:new FormData(this),
-						contentType:false,
-						cache:false,
-						processData:false,
-						beforeSend: function(){	
-						$("#errorUser").fadeOut();
-						$("#userButton").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Registering User ...');
-	              		},
-						success : function(response){						
-							if(response=="ok"){									
-							swal({
-								title:"Success",
-								text:"Account Successfully Created",
-								icon:"success",
-								button:"OK"
-							});
-								$("#userButton").html('SIGN UP');
-								document.getElementById("registerUser").reset();
-								
-							}				
-							else {									
-								$("#errorUser").fadeIn(1000, function(){						
-									$("#errors").html('&nbsp; '+response+' ');
-									$("#userButton").html('SIGN UP');
-								});
-							}
-						}
-					});
-					}));
+               // Register New User
+ $('#registerUser').on('submit',(function(e){
+        //alert("You Are Good To Go");
+        e.preventDefault();
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        $.ajax({
+            url:"{{ route('register_user') }}",
+            type:"POST",
+            data:new FormData(this),
+            contentType:false,
+            cache:false,
+            processData:false,
+            beforeSend:function()
+            {
+                $('#btnUser').html('Creating Account');
+            },
+            success : function(response)
+            {
+                if($.isEmptyObject(response.user_errors))
+                {
+                  //$('#myModal').modal('toggle');
+                  $("#user_errors").fadeOut(1000,function(){
+                       
+                        
+                    });
+
+                    swal({
+                    title: 'Success!',
+                    text: "Account Successfully Created!",
+                    type: 'success',
+                    padding: '2em'
+                    });
+                    // $('#products_table').DataTable().ajax.reload();
+        
+                   $('#registerUser').trigger("reset");
+                   
+                    $("#btnUser").html('REGISTER');
+
+                    // table.ajax.reload();
+                }
+                else
+                {
+                    $("#user_errors").fadeIn(1000,function(){
+                        printErrorMsg(response.user_errors,'user_errors');
+                        $("#btnUser").html('REGISTER');
+                    });
+                }
+            }
+        });
+        
+       }));
+            //End
 				
             })
         </script>

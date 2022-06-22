@@ -3,6 +3,8 @@
 <head>
         <meta charset="utf-8" />
         <title>HAPPY -  BLOOD BANK</title>
+          <!-- CSRF Token -->
+         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Blood Donation" name="description" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -40,7 +42,7 @@
                                 <div class="card-body p-4">
                                     
                                     <div class="text-center w-75 m-auto">
-                                        <a href="index.html">
+                                        <a href="#">
                                             <span style="font-size: 18px;color:black;">HAPPY BLOOD DONOR</span>
                                         </a>
                                         <h5 class="text-uppercase text-center font-bold mt-4">Sign In </h5>
@@ -53,14 +55,14 @@
                                      
                     
                                     
-                                    <form method="POST">
-                                    @csrf 
+                                    <form id="loginUser" method="POST">
+                                 
                                        <div id="login-message-error" style="display: none;" class="alert alert-dismissable alert-danger">
 
                                        </div>
                                         <div class="form-group mb-3">
                                             <label for="emailaddress">Email address</label>
-                                            <input class="form-control" type="email" id="emailaddress" name="user" required="" placeholder="Enter your email">
+                                            <input class="form-control" type="email" id="emailaddress" name="email" required="" placeholder="Enter your email">
                                         </div>
                          
                                         <div class="form-group mb-3">
@@ -103,103 +105,77 @@
             </div>
             <!-- end page -->
 
-
+<!-- Jquery  -->
+<script src="{{asset('frontend/js/jquery-3.3.1.min.js')}}"> </script>
+<!-- End -->
+<script src="{{asset('frontend/js/sweetalert.min.js')}}"></script>
         <!-- Vendor js -->
         <script src="{{asset('frontend/assets/js/vendor.min.js')}}"></script>
 
         <!-- App js -->
-        <!-- <script src="assets/js/app.min.js"></script> -->
-        <!-- Jquery -->
-        <script src="../js/jquery-2.1.4.min.js"> </script>
-<!-- End -->
-<script src="../js/sweetalert.min.js"></script>
+        <script src="{{asset('frontend/assets/js/app.min.js')}}"></script>
         <script>
             $(document).ready(function(){
-            	//Send OTP Message
-			$('#request-otp').on('click',function(){
-				//alert("You Are Good To Go");
-				$('#otp-message-success').hide();
-				$('#otp-message-error').hide();
-				$('#otp-message').hide();
-				var login_email = $('#emailaddress').val();
-                if(login_email !=='')
+               // Register New User
+ $('#loginUser').on('submit',(function(e){
+        //alert("You Are Good To Go");
+        e.preventDefault();
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        $.ajax({
+            url:"{{ route('user.login.post') }}",
+            type:"POST",
+            data:new FormData(this),
+            contentType:false,
+            cache:false,
+            processData:false,
+            beforeSend:function()
+            {
+                $('#loginButton').html('Checking Credentials');
+            },
+            success : function(response)
+            {
+                if($.isEmptyObject(response.login_errors))
                 {
-                    $.ajax({
-				   url:"../send_otp.php",
-				   type:"POST",
-				   data:{login_email:login_email},
-				   beforeSend:function()
-				   {
-                      $('#request-otp').html("Requesting OTP Code.........");
-				   },
-				   success:function(response)
-				   {
-					   var res = JSON.parse(response);
-					   if(res.status =="okay")
-					   {
-						   $('#otp-message-success').show();
-						   $('#otp-message-success').html(res.message);
-						   $('#otp-message-error').fadeOut();
-						   $('#otp-message').fadeOut();
-						   $('#request-otp').html("Request OTP");
+                  //$('#myModal').modal('toggle');
+                  $("#login-message-error").fadeOut(1000,function(){
+                       
+                        
+                    });
 
-					   }
-					   else
-					   {
-						$('#otp-message').fadeOut();
-						$('#otp-success').fadeOut();
-						$('#otp-message-error').fadeIn();
-						$('#otp-message-error').html(res.errors);
-						$('#request-otp').html("Request OTP");
-					   }
-				   }
-			   })
+                    swal({
+                    title: 'Success!',
+                    text: "Credentials Right!",
+                    type: 'success',
+                    padding: '2em'
+                    });
+                    window.location.href="{{route('user.dashboard')}}"
+                   $('#loginUser').trigger("reset");
+                   
+                    $("#loginButton").html('REGISTER');
+
+                    // table.ajax.reload();
                 }
                 else
                 {
-                    alert("Enter Your Email First");
+                    $("#login-message-error").fadeOut(1000,function(){
+                        $('#login-message-error').html('Invalid Credentials'); 
+                    });
+            
+               
                 }
-              
-			});
-             //login
-             //alert("You Are Good To Go");
-      $("#loginForm").on('submit',(function(e)
-          { 
-              //alert("You Are Good To Go");
-              e.preventDefault();
-              $.ajax({
-                  url:"../logged.php",
-                  type:"POST",
-                  data:new FormData(this),
-                  contentType:false,
-                  cache:false,
-                  processData:false,
-                  success:function(data)
-                  {
-                      //$("#return-data").html(data);
-                      if (data=="OK")
-                       {
-                          $("#loginButton").fadeIn();
-                          $("#loginButton").html('<img src="images/ajax-loader.gif" /> &nbsp; Cool!!! Credentials Right....System Logging You in.');
-                          setTimeout(' window.location.href = "../choose_dashboard.php"; ',3000);
-                      }
-          
-                      else
-                      {
-                          
-                          $("#login-message-error").fadeIn();
-                          $("#login-message-error").html(data);
-                      }
-                  },
-                  error:function()
-                  {
-                      
-                  }
-              });
-              }));
-      // End login
-            });
+            }
+        });
+        
+       }));
+            //End
+				
+            })
         </script>
+
     </body>
 
 </html>

@@ -6,6 +6,7 @@
    <title>HAPPY BLOOD BANK</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!--favicon-->
 	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
 	<!--plugins-->
@@ -16,12 +17,15 @@
 	<!-- loader-->
 	<link href="{{asset('backend/css/pace.min.css')}}" rel="stylesheet" />
 	<script src="{{asset('backend/js/pace.min.js')}}"></script>
+	<link rel="stylesheet" href="{{asset('backend/plugins/notifications/css/lobibox.min.css')}}" />
 	<!-- Bootstrap CSS -->
 	<link href="{{asset('backend/css/bootstrap.min.css')}}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
 	<link href="{{asset('backend/css/app.cs')}}s" rel="stylesheet">
 	<link href="{{asset('backend/css/icons.css')}}" rel="stylesheet">
 	<script src="{{ asset('js/app.js') }}" defer></script>
+		<!-- Datatable  -->
+		<link href="{{asset('backend/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
 
     <style>
 		.center 
@@ -82,6 +86,28 @@
 	<!--app JS-->
 	<script src="{{asset('backend/js/app.js')}}"></script>
 	 <!-- Scripts -->
+	 <!-- Datable Js Plugin -->
+	<script src="{{asset('backend/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+	<script src="{{asset('backend/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
+
+	 	<!--notification js -->
+	<script src="{{asset('backend/plugins/notifications/js/lobibox.min.js')}}"></script>
+	<script src="{{asset('backend/plugins/notifications/js/notifications.min.js')}}"></script>
+	<script src="{{asset('backend/plugins/notifications/js/notification-custom-script.js')}}"></script>
+
+	 @stack('scripts')
+	 @stack('donor_scripts')
+	 <script>
+		 function printErrorMsg(msg,div)
+					 {
+            //  alert('#' + div);
+						 $("#" + div).find("ul").html('');
+						 $("#" + div).css('display','block');
+						 $.each(msg,function(key,value){
+              $("#" + div).find('ul').append('<li>' + value + '</li>');
+						 });
+					 }
+	</script>
 </body>
 
 

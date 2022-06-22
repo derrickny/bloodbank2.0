@@ -19,11 +19,11 @@
 						<div class="menu-title">Dashboard</div>
 					</a>
 					<ul>
-						<li> <a href="#"><i class="bx bx-right-arrow-alt"></i>New Hospital</a>
+						<li> <a href="{{route('hospital.create')}}"><i class="bx bx-right-arrow-alt"></i>New Hospital</a>
 						</li>
-						<li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Hospitals List</a>
+						<li> <a href="{{route('hospital.index')}}"><i class="bx bx-right-arrow-alt"></i>Hospitals List</a>
 						</li>
-						<li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Donors List</a>
+						<li> <a href="{{url('donors_list')}}"><i class="bx bx-right-arrow-alt"></i>Donors List</a>
 						</li>
                         <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Blood Groups</a>
 						</li>

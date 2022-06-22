@@ -19,11 +19,11 @@ class UsersTableSeeder extends Seeder
         $faker = Faker::create();
 
         User::create([
-            'first_name' => $faker->firstName,
-            'last_name' => $faker->lastName,
+            'full_name' => $faker->firstName,
             'email' => "test@admin.com",
             'password' => bcrypt('password'),
             'gender' => 'male',
+            'phone_no' =>'072100000',
             'role' => 1
         ]);
     }
