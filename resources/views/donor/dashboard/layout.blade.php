@@ -90,6 +90,7 @@
         <script src="{{asset('frontend/assets/js/app.min.js')}}"></script>
 
         @stack('scripts')
+        @stack('booking-scripts')
         @stack('logout-scripts')
        </body>  
 </html>

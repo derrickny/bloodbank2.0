@@ -63,7 +63,7 @@
         <li><a href="#" class="scroll-link" data-id="about">About Donation</a> </li>
 		<li><a href="#" class="scroll-link" data-id="camps">Hospitals</a></li>
 		<li><a href="#" class="scroll-link" data-id="contact">Contact us</a></li>
-        <li><a href="{{url('logindonor')}}" class="scroll-link" data-id="contact">Login</a></li>
+        <li><a href="{{url('logindonor')}}"  data-id="contact">Login</a></li>
 		<li class="icon"><a href="javascript:void(0);" style="font-size: 15px;" onclick="myFunction()">&#9776;</a></li>
     </ul>
 	    <!--/.navbar-->
@@ -83,7 +83,7 @@
 			
 				<div class="row" style="font-family: helvetica;">
 					<div class="col-md-4">
-						<div class="register w3-hover-amber">
+						<div class="register w3-hover-red">
 							<a style="text-decoration:none;color:#fff;" href="{{url('registerdonor')}}">Become A Blood Donor</a>
 							<br>
 						<br>
@@ -97,11 +97,12 @@
 						
 					
 					<div class="col-md-4 ">
-						<div class="already w3-hover-pink">
+						<div class="already w3-hover-red">
 							<strong>HOSPITAL</strong>
 							<br>
 						<br>
-						<button  style="width: auto;" class="bt info">REGISTER</button>
+						<a href="{{ url('logindonor') }}" class="bt success">LOGIN</a>
+
 		
 						</div>
 						
@@ -156,7 +157,7 @@
       </div>
     </div>
   </div>
-						<div class="can w3-hover-lime">
+						<div class="can w3-hover-">
 						<strong>Who Can give blood?</strong>
 						<br>
 						<br>

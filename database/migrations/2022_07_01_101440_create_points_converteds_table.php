@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('donation_bookings', function (Blueprint $table) {
+        Schema::create('points_converteds', function (Blueprint $table) {
             $table->id();
-            $table->enum('donation_place',['home','hospital']);
-            $table->string('user_location')->nullable();
-            $table->string('date_booked');
             $table->integer('hospital_id');
-            $table->integer('booked_by');
+            $table->integer('user_id');
+            $table->integer('points_converted');
+            $table->integer('rem_points');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donation_bookings');
+        Schema::dropIfExists('points_converteds');
     }
 };

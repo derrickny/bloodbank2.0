@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('date_donated');
             $table->string('place_of_donation');
             $table->string('pints_donated');
-            $table->integer('blood_group_id');
+            $table->integer('blood_group');
             $table->enum('status',['verified','unverified']);
             $table->timestamps();
         });

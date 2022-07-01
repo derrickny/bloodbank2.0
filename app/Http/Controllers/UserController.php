@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display Hospital listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -34,11 +34,16 @@ class UserController extends Controller
         //
         if($request->ajax())
         {
-            $data = Hospital::latest()->get();
+            $user = Auth::guard('user')->user();
+            $data=$user->role==3 ? Hospital::where('hospital_email',$user->email)->latest()->get()
+            : Hospital::latest()->get();
+            
             return Datatables::of($data)->addIndexColumn()
             ->addColumn('action',function($row){
+                $user = Auth::guard('user')->user();
                 $btn='<a href="javascript:void(0)" data-toggle="tooltip"  id="'.$row->id.'"  data-original-title="Donate" class="donate btn btn-primary btn-sm">Donate</a>';
-                return $btn;
+                $edit='<a href="javascript:void(0)" data-toggle="tooltip"  id="'.$row->id.'"  data-original-title="Edit" class="donate btn btn-warning btn-sm">Edit</a>';
+                return $user->role==2 ? $btn : $edit;
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -46,6 +51,7 @@ class UserController extends Controller
 
       
     }
+    
 
        /**
       * Store Users Data

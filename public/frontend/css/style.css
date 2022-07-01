@@ -160,7 +160,7 @@ div.accordion.pull-right.active:after
 				}
 			}
 			.active {
-    background-color: #4CAF50;
+    background-color: #b21c1c;
 }
             .img1
 {
@@ -177,7 +177,7 @@ div.accordion.pull-right.active:after
 	width: 100%;
 	height: 25%;
 	border: none;
-	background-color: #084B8A;
+	background-color: #8a0817;
 	color:#ffffff;
 	font-size: 22px;
 	cursor: pointer;
@@ -201,7 +201,7 @@ div.accordion.pull-right.active:after
 	width: 100%;
 	height: 25%;
 	border: none;
-	background-color: #003300;
+	background-color: #330100;
 	color:#ffffff;
 	font-size: 22px;
 	cursor: pointer;
@@ -479,7 +479,7 @@ span .close1 .pull-right:focus
 	width: 100%;
 	height: 25%;
 	border: none;
-	background-color: #66FF33;
+	background-color: #ff3336;
 	color:#ffffff;
 	font-size: 22px;
 	cursor: pointer;
@@ -586,7 +586,7 @@ ul.topnav
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	background-color:#333;
+	background-color:rgb(78, 19, 19);
 }
 ul.topnav li
 {

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('date_of_birth')->nullable();
             $table->string('blood_group')->nullable();
             $table->string('password');
-            $table->enum('gender',['male','female']);
+            $table->enum('gender',['male','female'])->nullable();
             $table->integer('role');
             $table->timestamps();
         });

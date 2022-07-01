@@ -25,7 +25,7 @@
 											<th> Date of Birth</th>
                                             <th>Blood Group</th>
 											<th>Gender</th>
-											<th>Action</th>
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -39,7 +39,7 @@
 											<th> Date of Birth</th>
                                             <th>Blood Group</th>
 											<th>Gender</th>
-											<th>Action</th>
+										
 										</tr>
 									</tfoot>
 								</table>
@@ -68,7 +68,7 @@
                     {data:'date_of_birth',name:'date_of_birth'},
                     {data:'blood_group',name:'blood_group'},
                     {data:'gender',name:'gender'},
-                    {data:'action',name:'action',orderable:false,searchable:false}
+                    
                     ],  
 				"dom": "lBfrtip",
 				"buttons": [

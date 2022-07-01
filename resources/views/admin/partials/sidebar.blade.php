@@ -25,8 +25,8 @@
 						</li>
 						<li> <a href="{{url('donors_list')}}"><i class="bx bx-right-arrow-alt"></i>Donors List</a>
 						</li>
-                        <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Blood Groups</a>
-						</li>
+                        <!-- <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Blood Groups</a>
+						</li> -->
 						<li> <a href="{{ url('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="bx bx-right-arrow-alt"></i>Logout
