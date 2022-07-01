@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('user_donations', function (Blueprint $table) {
             //
             $table->renameColumn('place_of_donation','donation_user_id');
-            $table->renameColumn('blood_group_id','blood_group');
+           
         });
     }
 
