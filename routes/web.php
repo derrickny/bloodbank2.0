@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController as Login;
 use App\Http\Controllers\DonationBookingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDonationController;
+use App\Http\Controllers\FeedbackController;
 
 
 /*
@@ -67,7 +68,8 @@ Route::group(['prefix' => 'admin'],function(){
         Route::resource('hospital',HospitalController::class);
 
         Route::get('view_donors',[HospitalController::class,'donors'])->name('view_donors');
-        
+        Route::post('update-hospital',[HospitalController::class,'update']);
+
         
     });
 });
@@ -92,7 +94,6 @@ Route::group(['prefix' => 'user'],function(){
         Route::get('hospitals_list',[HospitalController::class,'Hospitals'])->name('hospitals_list');
         Route::post('convert_points',[UserDonationController::class,'convertPoints'])->name('convert_points');
         Route::post('sendSms',[DonationBookingController::class,'sendSms'])->name('sendSms');
-
         Route::get('stock',function(){
             return view('donor.dashboard.our_blood_stock');
         })->name('user.stocks');
@@ -104,7 +105,9 @@ Route::group(['prefix' => 'user'],function(){
 Route::post('register_user',[UserController::class,'store'])->name('register_user');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('display_hospitals',[HospitalController::class,'Hospitals'])->name('display_hospitals');
 
+Route::resource('feedbacks',FeedbackController::class);
 //Routes for mailing
 
 Route::get('/email',function() {

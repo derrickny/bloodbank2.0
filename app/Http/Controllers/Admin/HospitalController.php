@@ -37,7 +37,7 @@ class HospitalController extends Controller
              </a>';
             })
             ->addColumn('action',function($row){
-                $btn='<a href="javascript:void(0)" data-toggle="tooltip"  id="'.$row->id.'"  data-original-title="Edit Category" class="edit_category btn btn-primary btn-sm">Edit</a>';
+                $btn="<a href='". route('hospital.edit',$row->id)."'  data-original-title='Edit Hospital' class='btn btn-primary btn-sm'>Edit</a>";
                 return $btn;
 
             })
@@ -205,6 +205,7 @@ class HospitalController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -216,6 +217,8 @@ class HospitalController extends Controller
     public function edit($id)
     {
         //
+        $hospital = Hospital::findOrFail($id);
+        return view('admin.dashboard.hospital.edit',compact('hospital'));
     }
 
     /**
@@ -225,9 +228,42 @@ class HospitalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        //$request->validate();
+        $validator = Validator::make($request->all(),[
+            'hospital_name' => 'required|max:255',
+            'hospital_location' => 'required',
+            'hospital_phone' => 'required',
+            'hospital_email' => 'required',  
+        ]);
+
+        if($validator->passes())
+        {
+
+            $user = Auth::guard('admin')->user();
+           $id = $request->hospital_id;
+            $update_data = array(
+                    'hospital_name' => $request->hospital_name,
+                    'hospital_phone' => $request->hospital_phone,
+                    'hospital_email' => $request->hospital_email,
+                    'hospital_location' =>$request->hospital_location,
+                    'hospital_doc'=> $request->hospital_doc,
+                    'hospital_status' => "verified",
+                    'added_by' => $user->id,
+            );
+            Hospital::whereId($id)->update($update_data);
+            return response()->json(['success'=>'Hospital Details Successfully Updated']);
+
+        }
+        else
+        {
+            return response()->json(['hospital_errors' => $validator->errors()->all()]);
+
+ 
+        }
+
     }
 
     /**
