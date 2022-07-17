@@ -137,14 +137,15 @@ div.accordion.pull-right.active:after
 				background-color: #111;
 				color: white;
 				font-size: 25px;
-				color:;
+				
 			}
 			.price li
 			{
 				border-bottom: 1px solid #eee;
 				padding: 20px;
 				text-align: center;
-				color: #ffffff;
+				font-size: larger;
+				color: #0e0d0d;
 			}
 			.price .grey{
 				background-color: #eee;
@@ -676,7 +677,7 @@ This class makes the topnav look good on small screens */
 }
 
 .social-bg-overlay {
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(219, 49, 49, 0.6);
     padding-top: 100px;
     padding-bottom: 80px;
 }
@@ -706,12 +707,12 @@ This class makes the topnav look good on small screens */
     text-align: center;
     border-radius: 50%;
     background-color: #ffffff;
-    color: #58B325;
+    color: #b33325;
     font-size: 36px;
 }
 
 .walam-social li a:hover {
-    background-color: #398110;
+    background-color:#ff3336;
     color: #fff;
 }
 
@@ -733,7 +734,7 @@ This class makes the topnav look good on small screens */
         text-align: center;
         border-radius: 50%;
         background-color: #ffffff;
-        color: #58B325;
+        color: #ff3336;
         font-size: 24px;
     }
 

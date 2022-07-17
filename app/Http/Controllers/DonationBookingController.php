@@ -124,8 +124,8 @@ class DonationBookingController extends Controller
                 $user_details = User::where('id','=',$request->hidden_sms_user_id)->first();
                 $receiver = ltrim($user_details->phone_no,0);
                 $message = $request->message;
-                $username = 'first'; // use 'sandbox' for development in the test environment
-                $apiKey   = '8418597fc7bbd6a1238ae0ce49819ac18669bd2ee5e0e46c6392912e5e1aac24'; // use your sandbox app API key for development in the test environment
+                $username = 'donor'; // use 'sandbox' for development in the test environment
+                $apiKey   = '3b547c6ab655741258126f3bc37c0b1dcc42b3f5ce7be45e91d0b78cc384a5ef'; // use your sandbox app API key for development in the test environment
                 $AT       = new AfricasTalking($username, $apiKey);
     
                 // Get one of the services
