@@ -43,7 +43,7 @@
                                     
                                     <div class="text-center w-75 m-auto">
                                         <a href="#">
-                                            <span style="font-size: 18px;color:black;">HAPPY BLOOD DONOR</span>
+                                            <span style="font-size: 18px;color:black;">HAPPY BLOOD</span>
                                         </a>
                                         <h5 class="text-uppercase text-center font-bold mt-4">Sign In </h5>
                                       
