@@ -434,7 +434,7 @@
                     html += '<li>Venue</li>'
                     html += '<li>' + val.hospital_location + '</li>'
                     html += '<li>Contact Info</li>'
-                    html += '<li> Email : ' + val.hospital_email + ' Phone NO :  ' + val
+                    html += '<li> Email : ' + val.hospital_email +   '    Phone NO :  ' + val
                         .hospital_phone + '</li>'
                     html += '<li>Time</li>'
                     html += '<li>9 A.M to 5 P.M</li>'
