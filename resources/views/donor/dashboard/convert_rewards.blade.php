@@ -115,25 +115,7 @@ $(document).ready(function() {
 
 });
 
-    //Js Show Popup Modal with donation booking form
-
-    $(document).on('click', '.donate', function(e) {
-        //Hospital Id
-        let id = $(this).attr('id');
-        $('#hidden_hospital_id').val(id);
-        $('#donation_modal').modal('show');
-    })
-
-    //Hide/Show Location
-    $(document).on('change', '#donate_from', function() {
-        let value = $(this).val();
-        if (value == "home") {
-            $('#location').fadeIn('slow');
-        } else {
-            $('#location').fadeOut('slow');
-        }
-
-    })
+    
 
     //Save Booking Form Details To The Database
     $('#formConvert').on('submit', (function(e) {
@@ -173,6 +155,7 @@ $(document).ready(function() {
 
                     $("#buttonConvert").html('CONVERT');
                     $('#donation_modal').modal('hide');
+                    setTimeout('window.location.href = "/user/convert_rewards"; ',3000);
 
                     // table.ajax.reload();
                 } else {

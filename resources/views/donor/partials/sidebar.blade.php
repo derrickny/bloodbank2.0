@@ -1,6 +1,6 @@
 <div style="display:none;">{{$user = auth()->user()}}</div>
             <!-- ========== Left Sidebar Start ========== -->
-            <div class="left-side-menu">
+            <div class="left-side-menu" style="padding-top:10px;">
 
                 <div class="slimscroll-menu">
 
@@ -44,7 +44,7 @@
                             @if($user->role==2)
                            <li>
                                 <a href="javascript: void(0);">
-                                    <i class="fe-box"></i>
+                                    <i class="fe-award"></i>
                                     <span>Rewards </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -66,6 +66,24 @@
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><a href="{{route('user.stocks')}}" >Our Stock</a></li>
                                     <li><a href="{{ route('user.others-stocks')}} " >Others Stocks</a></li>
+                                    <li><a href="{{ route('swap-list')}} " >Swap Requests</a></li>
+                                    <li><a href="{{ route('conversions-list')}} " >Conversions Requests</a></li>
+                                    
+                                   
+                                </ul>
+                            </li>
+                           @endif
+
+                           @if($user->role==2)
+                           <li>
+                                <a href="javascript: void(0);">
+                                    <i class="fe-user"></i>
+                                    <span>Profile </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{route('edit-user')}}" >Edit Profile</a></li>
+                                    
                                    
                                 </ul>
                             </li>

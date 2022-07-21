@@ -41,14 +41,18 @@
 
                 <!-- LOGO -->
                 <div class="logo-box">
-                    <a href="index.php" class="logo text-center">
-                        <span class="logo-lg" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:antiquewhite;font-weight: bolder;letter-spacing: 0.5em;">
-                           HAPPY DONOR
+                    <a href="{{route('user.dashboard')}}" class="logo text-center">
+                        <span class="logo-lg" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:antiquewhite;font-weight: bolder;letter-spacing: 0.2em;">
+                          HAPPY DONOR
                             <!-- <span class="logo-lg-text-light">UBold</span> -->
+                            <br>
+                           <br>
                         </span>
                         <span class="logo-sm">
                             <!-- <span class="logo-sm-text-dark">U</span> -->
                            HAPPY DONOR
+                           <br>
+                           <br>
                         </span>
                     </a>
                 </div>

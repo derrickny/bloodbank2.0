@@ -114,17 +114,17 @@
 <div id="stocks-list" class="row profile">
     <div class="col-12">
         <div class="card-box table-responsive">
-            <h4 class="header-title"><b>Other Hospitals Blood Stocks</b></h4>
+            <h4 class="header-title"><b>Points Conversions Requests</b></h4>
             <p class="sub-header">
             </p>
 
-            <table id="others-stock-table" class="table table-striped table-bordered dt-responsive nowrap"
+            <table id="swaps-table" class="table table-striped table-bordered dt-responsive nowrap"
                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                 <thead>
                     <tr>
-                        <th>Hospital Name</th>
-                        <th>Blood Group</th>
-                        <th>Pints Donated</th>
+                        <th>Donor</th>
+                        <th>Points To Convert</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -145,23 +145,24 @@
 <script>
 $(document).ready(function() {
     $("#datatable").DataTable();
-    $("#others-stock-table").DataTable({
+    $("#swaps-table").DataTable({
         "processing": true,
-        "sAjaxSource": '{{route("other-stock")}}',
+        "sAjaxSource": '{{route("swap-list")}}',
         "pageLength": 10,
         "type": "GET",
         "columns": [{
-                data: 'hospital_name',
-                name: 'hospital_name'
+                data: 'full_name',
+                name: 'full_name'
             },
             {
-                data: 'blood_group',
-                name: 'blood_group'
+                data: 'points_converted',
+                name: 'points_converted'
             },
             {
-                data: 'deducted',
-                name: 'deducted'
+                data: 'status',
+                name: 'status'
             },
+          
             {
                 data: 'action',
                 name: 'action'
@@ -177,111 +178,26 @@ $(document).ready(function() {
 				]
     });
 
-    //Js Show Popup Modal with donation booking form
+  //Accept Swap
 
-    $(document).on('click', '.swap', function(e) {
+  $(document).on('click', '.accept', function(e) {
         //Hospital Id
         let id = $(this).attr('id');
-        let name  = $(this).attr('data-id');
-        $('.hospital_name').html(name);
-        $('#hidden_hospital_name').val(name)
-        $('#hidden_hospital_id').val(id);
-        $('#swap_modal').modal('show');
-    })
-
-    //Get Current Hospital Selected Blood Group Stock
-    // $(document).on('change','#bld_grp',function(){
-    //     let blood_group = $(this).val();
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-    //     $.ajax({
-    //         url:"{{route('current-stock')}}",
-    //         type:"POST",
-    //         data:{blood_group:blood_group},
-    //         success:function(response)
-    //         {
-    //             $('#our_stock').val(response);
-    //         }
-    //     })
-    // })
-
-    //Get Other Hospital Selected Blood Group Stock
-    // $(document).on('change','#other_bld_grp',function(){
-    //     let blood_group = $(this).val();
-    //     let id = $('#hidden_hospital_id').val();
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-    //     $.ajax({
-    //         url:"{{route('other-current-stock')}}",
-    //         type:"POST",
-    //         data:{blood_group:blood_group,id:id},
-    //         success:function(response)
-    //         {
-    //             $('#other_stock').val(response);
-    //         }
-    //     })
-    // })
-
-
-    //Swap  Form Details To The Database
-    $('#formSwap').on('submit', (function(e) {
-        //alert("You Are Good To Go");
-        let nam = $('#hidden_hospital_name').val();
-        e.preventDefault();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: "{{ route('swap') }}",
-            type: "POST",
-            data: new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
-            beforeSend: function() {
-                $('#buttonSwap').html('Requesting.....');
-            },
-            success: function(response) {
-                if ($.isEmptyObject(response.errors)) {
-                    //$('#myModal').modal('toggle');
-                    $("#errors").fadeOut(1000, function() {
-
-
-                    });
-                    swal({
+        if(confirm("Are You Sure You Want To Accept This Request"))
+        {
+            
+                swal({
                         title: "Success",
-                        text: "Blood Swap Request Sent,Wait For " + name + " To Accept " ,
+                        text: "Request Successfully Accepted" ,
                         icon: "success",
                         button: "OK",
                     });
 
-                    $('#formSwap').trigger("reset");
+                    $("#swaps-table").DataTable().ajax.reload();
 
-                    $("#buttonSwap").html('REQUEST');
-                    $('#swap_modal').modal('hide');
-
-                    // table.ajax.reload();
-                } else {
-                    $("#errors").fadeIn(1000, function() {
-                        printErrorMsg(response.errors, 'errors');
-                        $("#buttonSwap").html('REQUET');
-                    });
                 }
-            }
-        });
 
-    }));
-    //End
-
-
+})
 })
 </script>
 

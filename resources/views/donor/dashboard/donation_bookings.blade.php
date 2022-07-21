@@ -73,6 +73,7 @@
 
                     </div>
                     <input type="hidden" name="hidden_user_id" id="hidden_user_id">
+                    <input type="hidden" name="hidden_booking_id" id="hidden_booking_id">
 
                     <button type="submit" class="btn btn-primary btn-lg btn-block" id="buttonDonate">
                         SUBMIT</button>
@@ -128,7 +129,84 @@
         </div>
     </div>
 </div>
+<!-- Edit  -->
 
+<!-- Donate Blood Popup Modal -->
+<div style="display:none;">{{$user = auth()->user()}}</div>
+
+<div id="donation_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content ">
+            <!-- <button type="button" class="close w3-circle w3-padding-right" data-dismiss="modal" aria-label="Close"><span class="w3-xxlarge w3-text-white" aria-hidden="true">&times;</span></button> -->
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <div class="modal-header w3-card-4 w3-padding-8 w3-theme-d2 w3-padding-left">
+
+                <h4 class="modal-title w3-bottombar w3-slim" id="myModalLabel"
+                    style="color: #000;font-family: cursive;text-align:center;font-size:2vw;">Book Donation Here Day
+                    Here <b id="hospital-name"></b></h4>
+            </div>
+            <div class="modal-body">
+
+
+                <form method="POST" id="formBooking" class="w3-padding-left">
+
+
+
+                    <div class="row w3-padding-16">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <label class="label-control">
+                                    Donate From
+                                </label>
+                                <div class="input-group">
+
+                                    <select name="donate_from" id="donate_from" class="form-control">
+                                        <option value="hospital">Hospital</option>
+                                        <option value="home">Home</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12" id="location" style="display:none">
+                            <div class="form-group">
+                                <label class="label-control">
+                                    Location
+                                </label>
+                                <div class="input-group">
+
+                                    <input type="text" name="user_location" class="form-control" id="user_location">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row w3-padding-16">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <label class="label-control">
+                                    Date For Donation
+                                </label>
+                                <div class="input-group">
+
+                                    <input type="date" name="date_booked" class="form-control" id="date_booked">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="hidden" name="hidden_hospital_id" id="hidden_hospital_id">
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="buttonBooking">
+                        SUBMIT</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // Modal -->
 <!-- // Modal -->
 <!-- End -->
 <!-- Donors Booking List -->
@@ -209,6 +287,12 @@ $(document).ready(function() {
             }
         ],
         "lengthChange": !1,
+        "dom": "lBfrtip",
+				"buttons": [
+					'excel',
+					'pdf',
+					'print'
+				]
     });
 
     //Js Show Popup Modal with donation booking form
@@ -216,7 +300,9 @@ $(document).ready(function() {
     $(document).on('click', '.add_donation', function(e) {
         //Hospital Id
         let id = $(this).attr('id');
+        let booking_id = $(this).attr('data-id');
         $('#hidden_user_id').val(id);
+        $('#hidden_booking_id').val(booking_id);
         $('#donation_modal').modal('show');
     })
 

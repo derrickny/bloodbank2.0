@@ -21,7 +21,10 @@
     <body class="authentication-bg bg-gradient">
    <div class="row" style="padding-top: 20px;">
     <div class="col-12">
-       
+    <a href="{{url('/')}}" style="text-align:center;color:antiquewhite;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;text-decoration: none;
+        margin-left:5%;padding-top:100px;"> Home </a>
+
        </div>
        <div class="col-12">
          <a href="{{url('registerdonor')}}" style="text-align:center;color:antiquewhite;
@@ -57,9 +60,13 @@
                                     
                                     <form id="loginUser" method="POST">
                                  
-                                       <div id="login-message-error" style="display: none;" class="alert alert-dismissable alert-danger">
-
-                                       </div>
+                                    <div style="display: none;" id="user_errors" class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Error!</strong> 
+                                    <ul>
+                                        <li></li>
+                                    </ul>
+                                </div>
                                         <div class="form-group mb-3">
                                             <label for="emailaddress">Email address</label>
                                             <input class="form-control" type="email" id="emailaddress" name="email" required="" placeholder="Enter your email">
@@ -161,9 +168,10 @@
                 }
                 else
                 {
-                    $("#login-message-error").fadeOut(1000,function(){
-                        $('#login-message-error').html('Invalid Credentials'); 
-                    });
+                    $("#user_errors").fadeIn(1000, function() {
+                            printErrorMsg(response.login_errors, 'user_errors');
+                            $("#btnUser").html('REGISTER');
+                        });
             
                
                 }
@@ -174,6 +182,16 @@
             //End
 				
             })
+
+            //Print Errors
+    function printErrorMsg(msg, div) {
+        //  alert('#' + div);
+        $("#" + div).find("ul").html('');
+        $("#" + div).css('display', 'block');
+        $.each(msg, function(key, value) {
+            $("#" + div).find('ul').append('<li>' + value + '</li>');
+        });
+    }
         </script>
 
     </body>
