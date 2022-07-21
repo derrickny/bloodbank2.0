@@ -72,11 +72,17 @@ $(document).ready(function() {
                 name: 'blood_group'
             },
             {
-                data: 'total_pints',
-                name: 'total_pints'
+                data: 'deducted',
+                name: 'deducted'
             }
         ],
         "lengthChange": !1,
+        "dom": "lBfrtip",
+				"buttons": [
+					'excel',
+					'pdf',
+					'print'
+				]
     });
 
     //Js Show Popup Modal with donation booking form

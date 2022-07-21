@@ -41,14 +41,28 @@
 
                 <!-- LOGO -->
                 <div class="logo-box">
+<<<<<<< HEAD
                     <a href="index.php" class="logo text-center">
                         <span class="logo-lg" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:antiquewhite;font-weight: bolder;letter-spacing: 0.5em;">
                            HAPPY BLOOD
+=======
+                    <a href="{{route('user.dashboard')}}" class="logo text-center">
+                        <span class="logo-lg" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:antiquewhite;font-weight: bolder;letter-spacing: 0.2em;">
+                          HAPPY DONOR
+>>>>>>> 6193d0c020ab9bf8b3e4505797028e5a120eff55
                             <!-- <span class="logo-lg-text-light">UBold</span> -->
+                            <br>
+                           <br>
                         </span>
                         <span class="logo-sm">
                             <!-- <span class="logo-sm-text-dark">U</span> -->
+<<<<<<< HEAD
                            HAPPY BLOOD
+=======
+                           HAPPY DONOR
+                           <br>
+                           <br>
+>>>>>>> 6193d0c020ab9bf8b3e4505797028e5a120eff55
                         </span>
                     </a>
                 </div>

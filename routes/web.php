@@ -69,6 +69,7 @@ Route::group(['prefix' => 'admin'],function(){
 
         Route::get('view_donors',[HospitalController::class,'donors'])->name('view_donors');
         Route::post('update-hospital',[HospitalController::class,'update']);
+        Route::get('stocks',[UserDonationController::class,'Stock'])->name('stocks');
 
         
     });
@@ -93,7 +94,18 @@ Route::group(['prefix' => 'user'],function(){
         Route::get('convert_rewards',[UserDonationController::class,'sumRewards'])->name('convert_rewards');
         Route::get('hospitals_list',[HospitalController::class,'Hospitals'])->name('hospitals_list');
         Route::post('convert_points',[UserDonationController::class,'convertPoints'])->name('convert_points');
+        Route::post('swap',[UserDonationController::class,'swap'])->name('swap');
+        Route::get('swap-list',[UserDonationController::class,'swapList'])->name('swap-list');
+        Route::get('conversions-list',[UserDonationController::class,'conversionsList'])->name('conversions-list');
+        Route::post('accept-swap',[UserDonationController::class,'acceptSwap'])->name('accept-swap');
+        Route::post('current-stock',[UserDonationController::class,'currentStock'])->name('current-stock');
+        Route::post('other-current-stock',[UserDonationController::class,'othercurrentStock'])->name('other-current-stock');
         Route::post('sendSms',[DonationBookingController::class,'sendSms'])->name('sendSms');
+        Route::post('update-booking',[DonationBookingController::class,'update']);
+        Route::post('edit-hospital-profile',[UserController::class,'editProfile'])->name('edit-hospital-profile');
+        Route::post('update_user',[UserController::class,'updateUser'])->name('update_user');
+        Route::post('edit-hospital',[UserController::class,'updateHospital'])->name('edit-hospital');
+        Route::get('edit-user',[UserController::class,'editUser'])->name('edit-user');
         Route::get('stock',function(){
             return view('donor.dashboard.our_blood_stock');
         })->name('user.stocks');

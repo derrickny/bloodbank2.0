@@ -64,13 +64,16 @@
   <script src="{{asset('frontend/assets/libs/datatables/jquery.dataTables.min.js')}}"></script>
   <script src="{{asset('frontend/assets/libs/datatables/dataTables.bootstrap4.min.js')}}"></script>
   <!-- Buttons examples -->
-  <script src="{{asset('frontend/assets/libs/datatables/dataTables.buttons.min.js')}}"></script>
+   <!-- Datable Js Plugin -->
+	<script src="{{asset('backend/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+	<script src="{{asset('backend/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
+  <!-- <script src="{{asset('frontend/assets/libs/datatables/dataTables.buttons.min.js')}}"></script>
   <script src="{{asset('frontend/assets/libs/datatables/buttons.bootstrap4.min.js')}}"></script>
   <script src="{{asset('frontend/assets/libs/jszip/jszip.min.js')}}"></script>
   <script src="{{asset('frontend/assets/libs/pdfmake/pdfmake.min.js')}}"></script>
   <script src="{{asset('frontend/assets/libs/pdfmake/vfs_fonts.js')}}"></script>
   <script src="{{asset('frontend/assets/libs/datatables/buttons.html5.min.js')}}"></script>
-  <script src="{{asset('frontend/assets/libs/datatables/buttons.print.min.js')}}"></script>
+  <script src="{{asset('frontend/assets/libs/datatables/buttons.print.min.js')}}"></script> -->
 
   <!-- Responsive examples -->
   <script src="{{asset('frontend/assets/libs/datatables/dataTables.responsive.min.js')}}"></script>

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class UserDonations extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['hospital_id','date_donated','donation_user_id','pints_donated','blood_group','reward','status'];
+    protected $fillable = ['hospital_id','donation_booking_id',
+    'date_donated','donation_user_id',
+    'pints_donated','blood_group',
+    'reward','status'];
 }

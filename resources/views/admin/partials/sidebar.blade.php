@@ -25,6 +25,8 @@
 						</li>
 						<li> <a href="{{url('donors_list')}}"><i class="bx bx-right-arrow-alt"></i>Donors List</a>
 						</li>
+						<li> <a href="{{route('stocks')}}"><i class="bx bx-right-arrow-alt"></i>Stock List</a>
+						</li>
                         <!-- <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Blood Groups</a>
 						</li> -->
 						<li> <a href="{{ url('logout') }}"

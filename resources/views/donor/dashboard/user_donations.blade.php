@@ -2,37 +2,14 @@
 @section('title') Hospitals List @endsection
 @section('content')
 
-<!-- Donate Blood Popup Modal -->
-<div style="display:none;">{{$user = auth()->user()}}</div>
 
-<div id="donation_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-
-        <div class="modal-content ">
-            <!-- <button type="button" class="close w3-circle w3-padding-right" data-dismiss="modal" aria-label="Close"><span class="w3-xxlarge w3-text-white" aria-hidden="true">&times;</span></button> -->
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <div class="modal-header w3-card-4 w3-padding-8 w3-theme-d2 w3-padding-left">
-
-                <h4 class="modal-title w3-bottombar w3-slim" id="myModalLabel"
-                    style="color: #000;font-family: cursive;text-align:center;font-size:2vw;">Add Blood Donation Details <b id="hospital-name"></b></h4>
-            </div>
-            <div class="modal-body">
-
-
-             
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- // Modal -->
-<!-- End -->
 <!-- Hospitals List -->
+<div style="display:none;">{{$user = auth()->user()}}</div>
 <div id="hospitals-list" class="row profile">
     <div class="col-12">
         <div class="card-box table-responsive">
-            <h4 class="header-title"><b> @if($user->role==2) Your Blood Donations @endif  @if($user->role==3) Donors Blood Donations @endif</b></h4>
+            <h4 class="header-title"><b> @if($user->role==2) Your Blood Donations @endif @if($user->role==3) Donors
+                    Blood Donations @endif</b></h4>
             <p class="sub-header">
             </p>
 
@@ -41,6 +18,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Hospital</th>
                         <th>Donor Details</th>
                         <th>Date Of Donation</th>
                         <th>Blood Group</th>
@@ -55,6 +33,18 @@
                 <tbody>
 
                 </tbody>
+                <tfooter>
+                <tr>
+                       
+                        
+                        <td colspan="7">Remaining Points  : <span><b id="total_points">{{ $sum }}</b></span>
+                        <br>
+                        Converted Points  : <span><b id="total_points">{{ $sum_two }}</b></span>
+                    </td>
+                        
+
+                    </tr>
+                </tfooter>
             </table>
         </div>
     </div>
@@ -79,6 +69,10 @@ $(document).ready(function() {
                 name: 'DT_RowIndex'
             },
             {
+                data: 'hospital_name',
+                name: 'hospital_name'
+            },
+            {
                 data: 'user_details',
                 name: 'user_details'
             },
@@ -95,16 +89,25 @@ $(document).ready(function() {
                 name: 'pints_donated'
             },
             {
-                data:'points_rewarded',
-                name:'points_rewarded'
+                data: 'points_rewarded',
+                name: 'points_rewarded'
             },
             {
-               data:'status',
-               name:'status'
+                data: 'status',
+                name: 'status'
             }
         ],
+
+
         "lengthChange": !1,
+        "dom": "lBfrtip",
+        "buttons": [
+            'excel',
+            'pdf',
+            'print'
+        ]
     });
+
 
     //Js Show Popup Modal with donation booking form
 

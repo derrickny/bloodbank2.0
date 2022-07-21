@@ -31,7 +31,10 @@ class DonationBookingController extends Controller
             ->join('users','users.id','=','donation_bookings.booked_by')
             ->join('hospitals','hospitals.id','=','donation_bookings.hospital_id')
             ->where($column_where,'=',$user->email)
-            ->orderBy('donation_bookings.id','DESC')->get();
+            ->whereNotIn('donation_bookings.id', function ($query) {
+                $query->select('donation_booking_id')->from('user_donations');
+            })
+            ->orderBy('donation_bookings.id','DESC')->get(['users.*','hospitals.*','donation_bookings.*']);
             return Datatables::of($data)->addIndexColumn()
             ->addColumn('user_details',function($row2){
                 $date_birth = date_create($row2->date_of_birth);
@@ -47,7 +50,8 @@ class DonationBookingController extends Controller
             ->addColumn('action',function($row){
                 $user = Auth::guard('user')->user();
 
-                $btn= $user->role== 2 ? ' ' :  '<a href="javascript:void(0)" data-toggle="tooltip"  id="'.$row->booked_by.'"  data-original-title="Add Donation" class="add_donation btn btn-primary btn-sm">Add Donation</a>
+                $btn= $user->role== 2 ? "<a href='". route('donation_bookings.edit',$row->id)."'  data-original-title='Edit Booking' class='btn btn-primary btn-sm'>Edit</a>"
+                :  '<a href="javascript:void(0)" data-toggle="tooltip"  id="'.$row->booked_by.'" data-id="'.$row->id.'"  data-original-title="Add Donation" class="add_donation btn btn-primary btn-sm">Add Donation</a>
                 &nbsp <a href="javascript:void(0)" data-toggle="tooltip"  id="'.$row->booked_by.'"  data-original-title="Send Reminder" class="send_sms btn btn-primary btn-sm">Send Sms Reminder</a>';
                 return $btn;
 
@@ -178,6 +182,11 @@ class DonationBookingController extends Controller
     public function edit($id)
     {
         //
+        // $booking = DonationBooking::findOrFail($id);
+        $booking = DB::table('donation_bookings')
+        ->join('hospitals','hospitals.id','=','donation_bookings.hospital_id')
+        ->where('donation_bookings.id','=',$id)->first(['hospitals.*','donation_bookings.*']);
+        return view('donor.dashboard.edit_booking',compact('booking'));
     }
 
     /**
@@ -187,9 +196,35 @@ class DonationBookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+
+
+        $validator = Validator::make($request->all(),[
+            'donate_from' => 'required|max:255',
+            'date_booked' => 'required|max:255',
+            'hospital_name' => 'required|max:255'
+        ]);
+        if($validator->passes())
+        {
+        
+        $user = Auth::guard('user')->user();
+         $booking =  DonationBooking::where('id','=',$request->hidden_booking_id)->update([
+            'donation_place' => $request->donate_from,
+            'user_location' => $request->user_location,
+            'date_booked' => $request->date_booked,
+            'hospital_id'  => $request->hospital_name
+            
+          ]);
+
+     
+          
+          return response()->json(['success'=>'Donation Booking Successfully Updated,Will Get Back To You Shortly']);
+        }
+        else {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
     }
 
     /**
